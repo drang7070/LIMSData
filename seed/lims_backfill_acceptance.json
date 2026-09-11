@@ -1,0 +1,14 @@
+{
+  "verified_at": "2026-09-11 08:27:06.526651",
+  "start": "2016-09-11 02:29:07.453000",
+  "end": "2026-09-11 02:29:07.453000",
+  "source_total_all_dates": 687951,
+  "source_records_in_range": 687951,
+  "local_records_in_range": 687951,
+  "records_with_missing_entered_at": 77,
+  "source_records_without_any_date": 0,
+  "earliest_sample": "2019-10-24",
+  "latest_sample": "2026-09-10",
+  "all_20_windows_match": true,
+  "contains_all_current_source_rows": true
+}

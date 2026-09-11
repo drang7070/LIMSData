@@ -1,0 +1,10 @@
+{
+  "server": "10.39.1.122",
+  "port": 1433,
+  "database": "LIMS_DATA",
+  "table": "finalresult_all",
+  "driver": "ODBC Driver 17 for SQL Server",
+  "auth": "sql",
+  "days": 140,
+  "date_basis": "DATEENTER"
+}

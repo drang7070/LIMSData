@@ -1,0 +1,10 @@
+.git
+.venv
+data
+logs
+__pycache__
+*.pyc
+.env
+*.dpapi
+tools/lims_deps
+output

@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+.venv/
+.env
+data/*
+!data/.gitkeep
+logs/*
+!logs/.gitkeep
+*.dpapi
+*.sqlite3
+*.sqlite3-wal
+*.sqlite3-shm
+*.lock
+tools/lims_deps/
+output/

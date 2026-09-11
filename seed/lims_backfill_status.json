@@ -1,0 +1,176 @@
+{
+  "state": "complete",
+  "anchor": "2026-09-11 02:29:07.453000",
+  "limit_start": "2016-09-11 02:29:07.453000",
+  "date_basis": "DATEENTER",
+  "null_dateenter_fallback": "sampdate",
+  "step_months": 6,
+  "max_years": 10,
+  "windows": [
+    {
+      "start": "2026-03-11 02:29:07.453000",
+      "end": "2026-09-11 02:29:07.453000",
+      "state": "complete",
+      "source_count": 42333,
+      "local_count": 42333,
+      "verified_at": "2026-09-11 02:29:55.827878"
+    },
+    {
+      "start": "2025-09-11 02:29:07.453000",
+      "end": "2026-03-11 02:29:07.453000",
+      "state": "complete",
+      "source_count": 34368,
+      "local_count": 34368,
+      "verified_at": "2026-09-11 02:30:23.476781"
+    },
+    {
+      "start": "2025-03-11 02:29:07.453000",
+      "end": "2025-09-11 02:29:07.453000",
+      "state": "complete",
+      "source_count": 38196,
+      "local_count": 38196,
+      "verified_at": "2026-09-11 02:30:52.656042"
+    },
+    {
+      "start": "2024-09-11 02:29:07.453000",
+      "end": "2025-03-11 02:29:07.453000",
+      "state": "complete",
+      "source_count": 32962,
+      "local_count": 32962,
+      "verified_at": "2026-09-11 02:31:20.477599"
+    },
+    {
+      "start": "2024-03-11 02:29:07.453000",
+      "end": "2024-09-11 02:29:07.453000",
+      "state": "complete",
+      "source_count": 33276,
+      "local_count": 33276,
+      "verified_at": "2026-09-11 02:31:48.442023"
+    },
+    {
+      "start": "2023-09-11 02:29:07.453000",
+      "end": "2024-03-11 02:29:07.453000",
+      "state": "complete",
+      "source_count": 42579,
+      "local_count": 42579,
+      "verified_at": "2026-09-11 02:32:18.476938"
+    },
+    {
+      "start": "2023-03-11 02:29:07.453000",
+      "end": "2023-09-11 02:29:07.453000",
+      "state": "complete",
+      "source_count": 53718,
+      "local_count": 53718,
+      "verified_at": "2026-09-11 02:32:50.603271"
+    },
+    {
+      "start": "2022-09-11 02:29:07.453000",
+      "end": "2023-03-11 02:29:07.453000",
+      "state": "complete",
+      "source_count": 47395,
+      "local_count": 47395,
+      "verified_at": "2026-09-11 02:33:21.602489"
+    },
+    {
+      "start": "2022-03-11 02:29:07.453000",
+      "end": "2022-09-11 02:29:07.453000",
+      "state": "complete",
+      "source_count": 36552,
+      "local_count": 36552,
+      "verified_at": "2026-09-11 02:33:50.704818"
+    },
+    {
+      "start": "2021-09-11 02:29:07.453000",
+      "end": "2022-03-11 02:29:07.453000",
+      "state": "complete",
+      "source_count": 71966,
+      "local_count": 71966,
+      "verified_at": "2026-09-11 02:34:26.977287"
+    },
+    {
+      "start": "2021-03-11 02:29:07.453000",
+      "end": "2021-09-11 02:29:07.453000",
+      "state": "complete",
+      "source_count": 85685,
+      "local_count": 85685,
+      "verified_at": "2026-09-11 02:35:06.694997"
+    },
+    {
+      "start": "2020-09-11 02:29:07.453000",
+      "end": "2021-03-11 02:29:07.453000",
+      "state": "complete",
+      "source_count": 73155,
+      "local_count": 73155,
+      "verified_at": "2026-09-11 02:35:43.425070"
+    },
+    {
+      "start": "2020-03-11 02:29:07.453000",
+      "end": "2020-09-11 02:29:07.453000",
+      "state": "complete",
+      "source_count": 73732,
+      "local_count": 73732,
+      "verified_at": "2026-09-11 02:36:19.998293"
+    },
+    {
+      "start": "2019-09-11 02:29:07.453000",
+      "end": "2020-03-11 02:29:07.453000",
+      "state": "complete",
+      "source_count": 22034,
+      "local_count": 22034,
+      "verified_at": "2026-09-11 02:36:47.789502"
+    },
+    {
+      "start": "2019-03-11 02:29:07.453000",
+      "end": "2019-09-11 02:29:07.453000",
+      "state": "complete",
+      "source_count": 0,
+      "local_count": 0,
+      "verified_at": "2026-09-11 02:37:11.731305"
+    },
+    {
+      "start": "2018-09-11 02:29:07.453000",
+      "end": "2019-03-11 02:29:07.453000",
+      "state": "complete",
+      "source_count": 0,
+      "local_count": 0,
+      "verified_at": "2026-09-11 02:37:34.761819"
+    },
+    {
+      "start": "2018-03-11 02:29:07.453000",
+      "end": "2018-09-11 02:29:07.453000",
+      "state": "complete",
+      "source_count": 0,
+      "local_count": 0,
+      "verified_at": "2026-09-11 02:37:57.917461"
+    },
+    {
+      "start": "2017-09-11 02:29:07.453000",
+      "end": "2018-03-11 02:29:07.453000",
+      "state": "complete",
+      "source_count": 0,
+      "local_count": 0,
+      "verified_at": "2026-09-11 02:38:20.973617"
+    },
+    {
+      "start": "2017-03-11 02:29:07.453000",
+      "end": "2017-09-11 02:29:07.453000",
+      "state": "complete",
+      "source_count": 0,
+      "local_count": 0,
+      "verified_at": "2026-09-11 02:38:44.833528"
+    },
+    {
+      "start": "2016-09-11 02:29:07.453000",
+      "end": "2017-03-11 02:29:07.453000",
+      "state": "complete",
+      "source_count": 0,
+      "local_count": 0,
+      "verified_at": "2026-09-11 02:39:08.283018"
+    }
+  ],
+  "updated_at": "2026-09-11 02:39:08.622152",
+  "current_window": 20,
+  "completed_windows": 20,
+  "total_records": 687951,
+  "verified_total": 687951
+}

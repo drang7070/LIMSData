@@ -1,0 +1,8 @@
+{
+  "database": "lims_history.sqlite3",
+  "records": 687951,
+  "sha256": "fda6ab88be7cad2e78e7b37dc316bddcfff878b16067aadab05cf2e493947158",
+  "gzip_sha256": "4e717ce8485a1c61df32e064a8b8515214204b321cb158208fb675a0564bcd63",
+  "bytes": 361525248,
+  "gzip_bytes": 48918021
+}
