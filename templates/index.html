@@ -14,7 +14,10 @@
 <div class="facet"><label for="sample_type">样品类型</label><select id="sample_type" aria-label="样品类型" multiple style="height:66px"></select></div>
 <div class="facet"><label for="unit">单位</label><select id="unit" aria-label="单位" multiple style="height:66px"></select></div>
 <small>不选表示全部。按住 Ctrl 可多选；选择后自动更新。</small></section>
-<div><section><div class="row between"><h2>分析结果趋势</h2><span id="loading" class="muted" aria-live="polite"></span></div><div class="row between" style="margin-top:15px"><div class="dates"><label>取样开始日期<input id="start" type="date"></label><label>取样结束日期（含当天）<input id="end" type="date"></label></div><button id="apply" class="primary">查询趋势</button></div><div id="selection" class="muted" style="margin-top:14px"></div><div class="metrics"><div class="metric"><b id="count">—</b><span>分析记录</span></div><div class="metric"><b id="numeric">—</b><span>可绘制数值</span></div><div class="metric"><b id="other">—</b><span>文本 / 无效结果</span></div><div class="metric"><b id="seriesCount">—</b><span>趋势系列</span></div></div><div id="charts" aria-label="分析数据趋势"></div><p class="muted subtitle">源库取样时间仅精确到日期，图中以北京时间零点定位；同装置、样品、分析项、单位及取样时刻的数值取平均。不同单位分图展示。原始文本保留在下方，无效结果留空；“痕迹 / 少量 / 未检出”等按 PBI 换算，并标注规则。</p></section>
+<div><section><div class="row between"><h2>分析结果趋势</h2><span id="loading" class="muted" aria-live="polite"></span></div><div class="row between" style="margin-top:15px"><div class="dates"><label>取样开始日期<input id="start" type="date"></label><label>取样结束日期（含当天）<input id="end" type="date"></label></div><button id="apply" class="primary">查询趋势</button></div><div id="selection" class="muted" style="margin-top:14px"></div><div class="metrics"><div class="metric"><b id="count">—</b><span>分析记录</span></div><div class="metric"><b id="numeric">—</b><span>可绘制数值</span></div><div class="metric"><b id="other">—</b><span>文本 / 无效结果</span></div><div class="metric"><b id="seriesCount">—</b><span>趋势系列</span></div></div><div class="comparison-panel" style="background:#f2f8f9;padding:12px;border-radius:8px;margin-top:14px">
+<div class="row"><button id="pinCurves" disabled>保留当前曲线</button><button id="clearPins" disabled>清空保留曲线</button><label><input type="checkbox" id="normalize">变化幅度对比（各曲线 0–100%）</label></div>
+<p class="muted subtitle">先查询并保留，再切换样品、分析项或日期重新查询。实线为当前查询，虚线为保留曲线；明细和导出仅对应当前查询。保留项仅在本页面打开期间有效。</p>
+<div id="pinnedList" class="row" aria-label="保留曲线列表"></div><div id="comparisonNotice" class="muted subtitle" aria-live="polite"></div></div><div id="charts" aria-label="分析数据趋势"></div><p class="muted subtitle">源库取样时间仅精确到日期，图中以北京时间零点定位；同装置、样品、分析项、单位及取样时刻的数值取平均。原值模式下不同单位分图；变化幅度模式将每条曲线按自身最小值和最大值缩放至0–100%，恒定曲线显示在50%，悬停仍显示原值。原始文本保留在下方，无效结果留空；“痕迹 / 少量 / 未检出”等按 PBI 换算，并标注规则。</p></section>
 <section><div class="row between" style="margin-bottom:12px"><h2>筛选结果明细</h2><button id="export">导出当前筛选全部明细 CSV</button></div><div class="table-scroll"><table><thead><tr><th>取样时间</th><th>装置</th><th>样品名</th><th>分析项</th><th>原始结果</th><th>数值</th><th>单位</th><th>样品类型</th><th>结果说明</th><th>录入时间</th></tr></thead><tbody id="rows"></tbody></table></div><div class="row between" style="margin-top:12px"><span id="pages" class="muted"></span><div class="row"><button id="prev">上一页</button><button id="next">下一页</button></div></div></section></div></div>
 </main><div id="tip" class="tooltip"></div>
 <script>
@@ -27,14 +30,83 @@ function drawOptions(){for(const k of keys){const q=$(k+'Search')?.value.toLower
 function updateLink(){const p=params();p.delete('page');history.replaceState(null,'','/lims?'+p)}
 function time(v){return new Date(v.replace(' ','T')+'+08:00').getTime()}
 function svgNode(tag,attrs={},text=''){const n=document.createElementNS('http://www.w3.org/2000/svg',tag);for(const [k,v]of Object.entries(attrs))n.setAttribute(k,v);if(text)n.textContent=text;return n}
-function renderCharts(data){const root=$('charts');root.replaceChildren();const groups=new Map();for(const p of data.points){const key=JSON.stringify([p.plant,p.sample,p.analyte,p.unit]);if(!groups.has(key))groups.set(key,[]);groups.get(key).push(p)}$('seriesCount').textContent=groups.size;
-if(!data.summary.records||data.too_many_points||groups.size>40){const p=document.createElement('div');p.className='chart-empty';p.textContent=data.too_many_points?'筛选结果超过30,000个时刻，请缩小日期或选择装置、样品、分析项。':groups.size>40?'当前包含超过40个系列，请选择样品和分析项后查看趋势。':'当前筛选没有数据。请检查采集状态、数据来源和筛选条件。';root.append(p);return}
-const units=[...new Set(data.points.map(p=>p.unit))];for(const unit of units){const series=[...groups.values()].filter(s=>s[0].unit===unit);const finite=series.flat().filter(p=>p.value!==null);const h=document.createElement('h3');h.className='charts-heading';h.textContent='单位：'+(unit||'未提供');root.append(h);if(!finite.length){const p=document.createElement('p');p.textContent='此单位只有文本或无效结果，请查看明细。';root.append(p);continue}
-const all=series.flat(),minT=$('start').value?time($('start').value+' 00:00:00'):Math.min(...all.map(p=>time(p.sampled_at))),maxT=$('end').value?time($('end').value+' 23:59:59'):Math.max(...all.map(p=>time(p.sampled_at)));let low=Math.min(...finite.map(p=>p.value)),high=Math.max(...finite.map(p=>p.value));const pad=(high-low)*.12||Math.max(Math.abs(high)*.05,.1);low-=pad;high+=pad;const W=1050,H=330,L=72,R=25,T=28,B=45;const x=t=>L+(maxT===minT?.5:(t-minT)/(maxT-minT))*(W-L-R),y=v=>T+(high-v)/(high-low)*(H-T-B);const svg=svgNode('svg',{viewBox:`0 0 ${W} ${H}`,role:'img','aria-label':`分析趋势，单位${unit}，${finite.length}个数值时刻`});
-for(let i=0;i<5;i++){let v=low+(high-low)*i/4,yy=y(v);svg.append(svgNode('line',{x1:L,x2:W-R,y1:yy,y2:yy,stroke:'#e2eaf0'}),svgNode('text',{x:L-10,y:yy+4,'text-anchor':'end',fill:'#647b8b','font-size':12},Number(v.toPrecision(4)).toString()))}
-for(let i=0;i<6;i++){const rawT=minT+(maxT-minT)*i/5,t=Math.floor((rawT+8*3600000)/86400000)*86400000-8*3600000,d=new Date(t+8*3600000);svg.append(svgNode('text',{x:x(t),y:H-15,'text-anchor':'middle',fill:'#647b8b','font-size':12},d.toISOString().slice(5,10)))}
-const legend=document.createElement('div');legend.className='legend';series.forEach((s,index)=>{const color=colors[index%colors.length];let path='',open=false;for(const p of s){if(p.value===null){open=false;continue}path+=(open?'L':'M')+x(time(p.sampled_at))+','+y(p.value)+' ';open=true}svg.append(svgNode('path',{d:path,fill:'none',stroke:color,'stroke-width':2}));for(const p of s){if(p.value===null)continue;const title=`${p.plant} / ${p.sample}\n${p.analyte}\n${p.sampled_at}\n${Number(p.value.toPrecision(8))} ${unit}（${p.numeric_records}条数值）`;const c=svgNode('circle',{cx:x(time(p.sampled_at)),cy:y(p.value),r:4,fill:color,tabindex:0,'aria-label':title});c.append(svgNode('title',{},title));c.addEventListener('pointermove',e=>{const t=$('tip');t.textContent=title;t.style.display='block';t.style.left=Math.min(e.clientX+14,innerWidth-280)+'px';t.style.top=Math.max(8,Math.min(e.clientY+12,innerHeight-125))+'px'});c.addEventListener('pointerleave',()=>$('tip').style.display='none');svg.append(c);if(finite.length<=40)svg.append(svgNode('text',{x:x(time(p.sampled_at)),y:y(p.value)-11,'text-anchor':'middle',fill:color,'font-size':12},Number(p.value.toPrecision(4)).toString()))}const item=document.createElement('span'),dot=document.createElement('i');dot.className='dot';dot.style.background=color;item.append(dot,document.createTextNode(`${s[0].plant} / ${s[0].sample} / ${s[0].analyte}`));legend.append(item)});root.append(svg,legend)}}
-async function refresh(){const id=++requestId;$('loading').textContent='查询中…';$('error').style.display='none';try{if($('start').value&&$('end').value&&$('start').value>$('end').value)throw Error('开始日期不能晚于结束日期');const p=params();const [o,d]=await Promise.all([api('/api/lims/options?'+p),api('/api/lims/query?'+p)]);if(id!==requestId)return;facets=o;drawOptions();total=d.summary.records;$('count').textContent=total.toLocaleString();$('numeric').textContent=d.summary.numeric_records.toLocaleString();$('other').textContent=(total-d.summary.numeric_records).toLocaleString();$('selection').textContent=keys.flatMap(k=>selected[k]).join(' / ')||'全部装置、全部样品、全部分析项';renderCharts(d);$('rows').replaceChildren(...d.rows.map(r=>{const tr=document.createElement('tr');for(const k of ['sampled_at','plant','sample','analyte','result_raw','value','unit','sample_type','qualifier','entered_at']){const td=document.createElement('td');td.textContent=r[k]??'—';tr.append(td)}return tr}));$('pages').textContent=`共 ${total.toLocaleString()} 条 · 第 ${page} / ${Math.max(1,Math.ceil(total/100))} 页`;$('prev').disabled=page<=1;$('next').disabled=page*100>=total;updateLink();$('loading').textContent='已更新'}catch(e){if(id===requestId){error(e);$('loading').textContent='查询失败'}}}
+
+let currentData=null,currentQuery=null,queryPending=false,pinned=[],pinSequence=0;
+const seriesColors=new Map();
+function seriesKey(p){return JSON.stringify([p.plant,p.sample,p.analyte,p.unit])}
+function seriesLabel(p){return `${p.plant} / ${p.sample} / ${p.analyte} (${p.unit||'未提供单位'})`}
+function currentSeries(){
+  if(!currentData||currentData.too_many_points)return [];
+  const groups=new Map();
+  for(const p of currentData.points){if(!p.sampled_at||!Number.isFinite(time(p.sampled_at)))continue;const key=seriesKey(p);if(!groups.has(key))groups.set(key,[]);groups.get(key).push(p)}
+  return [...groups.values()].map(points=>({points,query:currentQuery,signature:JSON.stringify([currentQuery,points]),label:seriesLabel(points[0])}));
+}
+function dateRange(s){const times=s.points.map(p=>p.sampled_at.slice(0,10)).sort();return `${s.query?.start||times[0]} 至 ${s.query?.end||times[times.length-1]}`}
+function renderPinnedList(){
+  $('pinnedList').replaceChildren(...pinned.map(s=>{const item=document.createElement('div');item.className='row';item.style.cssText='background:white;padding:8px;border:1px solid #c6d4dd;border-radius:6px';const label=document.createElement('span');label.textContent=`保留 ${s.id} · ${s.label} · ${dateRange(s)}`;const button=document.createElement('button');button.textContent='移除';button.setAttribute('aria-label',`移除保留 ${s.id}`);button.onclick=()=>{pinned=pinned.filter(p=>p.id!==s.id);renderCharts()};item.append(label,button);return item}));
+  $('clearPins').disabled=!pinned.length;
+}
+function renderCharts(data){
+  if(data!==undefined)currentData=data;
+  const root=$('charts');root.replaceChildren();$('tip').style.display='none';renderPinnedList();
+  let live=currentSeries();const eligible=live.filter(s=>s.points.some(p=>Number.isFinite(p.value)));
+  $('pinCurves').disabled=queryPending||!eligible.length||live.length>40;
+  let message=currentData?.too_many_points?'当前查询超过30,000个时刻，请缩小筛选范围。':live.length>40?'当前查询超过40个系列，请缩小筛选范围。':!currentData?.summary.records?'当前查询无可用数据。':'';
+  if(live.length>40)live=[];
+  const signatures=new Set(pinned.map(s=>s.signature));
+  const series=[...pinned,...live.filter(s=>!signatures.has(s.signature))];
+  $('seriesCount').textContent=series.length;
+  if(series.length>40){message+=' 对比总数超过40条，请移除部分保留曲线或缩小当前查询。';$('comparisonNotice').textContent=message;return}
+  $('comparisonNotice').textContent=`${message} 已保留 ${pinned.length} 条；图中共 ${series.length} 条。`;
+  if(!series.length){const empty=document.createElement('div');empty.className='chart-empty';empty.textContent='请选择样品和分析项查询趋势；保留后可继续查询并对比。';root.append(empty);return}
+  const normalized=$('normalize').checked;
+  // The axis covers every snapshot's original range, not the currently edited form inputs.
+  const limits=series.flatMap(s=>[...s.points.map(p=>time(p.sampled_at)),...(s.query?.start?[time(s.query.start+' 00:00:00')]:[]),...(s.query?.end?[time(s.query.end+' 23:59:59')]:[])]);
+  const minT=limits.reduce((a,b)=>Math.min(a,b),Infinity),maxT=limits.reduce((a,b)=>Math.max(a,b),-Infinity);
+  const units=normalized?['normalized']:[...new Set(series.map(s=>s.points[0].unit))];
+  for(const unit of units){
+    const members=series.filter(s=>normalized||s.points[0].unit===unit);
+    const finite=members.flatMap(s=>s.points).filter(p=>Number.isFinite(p.value));
+    const h=document.createElement('h3');h.className='charts-heading';h.textContent=normalized?'变化幅度对比（每条曲线独立缩放，非实际含量）':'单位：'+(unit||'未提供');root.append(h);
+    if(!finite.length){const p=document.createElement('p');p.textContent='此组只有文本或无效结果，请查看当前查询明细。';root.append(p);continue}
+    let low=normalized?0:finite.reduce((a,p)=>Math.min(a,p.value),Infinity),high=normalized?100:finite.reduce((a,p)=>Math.max(a,p.value),-Infinity);
+    const pad=(high-low)*.12||Math.max(Math.abs(high)*.05,.1);low-=pad;high+=pad;
+    const W=1050,H=330,L=72,R=25,T=28,B=45;
+    const x=t=>L+(maxT===minT?.5:(t-minT)/(maxT-minT))*(W-L-R),y=v=>T+(high-v)/(high-low)*(H-T-B);
+    const svg=svgNode('svg',{viewBox:`0 0 ${W} ${H}`,role:'img','aria-label':`${normalized?'变化幅度':'分析趋势'}，${members.length}条曲线，${finite.length}个数值时刻`});
+    for(let i=0;i<5;i++){const v=normalized?i*25:low+(high-low)*i/4,yy=y(v);svg.append(svgNode('line',{x1:L,x2:W-R,y1:yy,y2:yy,stroke:'#e2eaf0'}),svgNode('text',{x:L-10,y:yy+4,'text-anchor':'end',fill:'#647b8b','font-size':12},Number(v.toPrecision(4))+(normalized?'%':'')))}
+    const ticks=new Set();for(let i=0;i<(minT===maxT?1:6);i++){const rawT=minT+(maxT-minT)*i/5,t=Math.max(minT,Math.floor((rawT+8*3600000)/86400000)*86400000-8*3600000);if(ticks.has(t))continue;ticks.add(t);const d=new Date(t+8*3600000);svg.append(svgNode('text',{x:x(t),y:H-15,'text-anchor':'middle',fill:'#647b8b','font-size':12},d.toISOString().slice(0,10)))}
+    const legend=document.createElement('div');legend.className='legend';
+    for(const s of members){
+      const colorKey=s.signature;if(!seriesColors.has(colorKey))seriesColors.set(colorKey,colors[seriesColors.size%colors.length]);const color=seriesColors.get(colorKey);
+      const values=s.points.filter(p=>Number.isFinite(p.value)).map(p=>p.value),min=values.reduce((a,b)=>Math.min(a,b),Infinity),max=values.reduce((a,b)=>Math.max(a,b),-Infinity);
+      const value=p=>normalized?(max===min?50:(p.value-min)/(max-min)*100):p.value;
+      const source=s.id?`保留 ${s.id}`:'当前查询';let path='',open=false;
+      for(const p of s.points){if(!Number.isFinite(p.value)){open=false;continue}path+=(open?'L':'M')+x(time(p.sampled_at))+','+y(value(p))+' ';open=true}
+      svg.append(svgNode('path',{d:path,fill:'none',stroke:color,'stroke-width':2,'stroke-dasharray':s.id?'7 4':'none','data-source':s.id?'retained':'current'}));
+      for(const p of s.points){if(!Number.isFinite(p.value))continue;
+        const title=`${source} · ${s.label}\n${p.sampled_at}\n原值 ${Number(p.value.toPrecision(8))} ${p.unit}（${p.numeric_records}条数值）${normalized?'\n相对位置 '+value(p).toFixed(2)+'%':''}`;
+        const c=svgNode('circle',{cx:x(time(p.sampled_at)),cy:y(value(p)),r:4,fill:s.id?'white':color,stroke:color,tabindex:0,'aria-label':title});c.append(svgNode('title',{},title));
+        const show=e=>{const t=$('tip');t.textContent=title;t.style.display='block';const rect=c.getBoundingClientRect();t.style.left=Math.min((e.clientX??rect.x)+14,innerWidth-300)+'px';t.style.top=Math.max(8,Math.min((e.clientY??rect.y)+12,innerHeight-145))+'px'};
+        c.addEventListener('pointermove',show);c.addEventListener('focus',show);c.addEventListener('pointerleave',()=>$('tip').style.display='none');c.addEventListener('blur',()=>$('tip').style.display='none');svg.append(c);
+        if(finite.length<=40)svg.append(svgNode('text',{x:x(time(p.sampled_at)),y:y(value(p))-11,'text-anchor':'middle',fill:color,'font-size':12},Number(value(p).toPrecision(4))+(normalized?'%':'')));
+      }
+      const item=document.createElement('span'),dot=document.createElement('i');dot.className='dot';dot.style.background=color;item.append(dot,document.createTextNode(`${source} · ${s.label} · ${dateRange(s)}`));legend.append(item);
+    }
+    root.append(svg,legend);
+  }
+}
+$('pinCurves').onclick=()=>{
+  if(queryPending)return;
+  const existing=new Set(pinned.map(s=>s.signature)),additions=currentSeries().filter(s=>s.points.some(p=>Number.isFinite(p.value))&&!existing.has(s.signature));
+  if(pinned.length+additions.length>40){error(Error('最多保留40条曲线，请先移除部分保留项。'));return}
+  if(pinned.reduce((n,s)=>n+s.points.length,0)+additions.reduce((n,s)=>n+s.points.length,0)>60000){error(Error('保留数据最多60,000个时刻，请缩小日期范围或移除保留项。'));return}
+  for(const s of additions)pinned.push({...s,id:++pinSequence,points:s.points.map(p=>({...p})),query:{...s.query}});
+  renderCharts();
+};
+$('clearPins').onclick=()=>{pinned=[];renderCharts()};
+$('normalize').onchange=()=>renderCharts();
+async function refresh(){const id=++requestId;queryPending=true;$('pinCurves').disabled=true;$('loading').textContent='查询中…';$('error').style.display='none';try{if($('start').value&&$('end').value&&$('start').value>$('end').value)throw Error('开始日期不能晚于结束日期');const p=params();const [o,d]=await Promise.all([api('/api/lims/options?'+p),api('/api/lims/query?'+p)]);if(id!==requestId)return;queryPending=false;currentQuery={filters:p.toString().replace(/(?:^|&)page=\d+/,'').replace(/^&/,''),start:p.get('start')||'',end:p.get('end')||''};facets=o;drawOptions();total=d.summary.records;$('count').textContent=total.toLocaleString();$('numeric').textContent=d.summary.numeric_records.toLocaleString();$('other').textContent=(total-d.summary.numeric_records).toLocaleString();$('selection').textContent=keys.flatMap(k=>selected[k]).join(' / ')||'全部装置、全部样品、全部分析项';renderCharts(d);$('rows').replaceChildren(...d.rows.map(r=>{const tr=document.createElement('tr');for(const k of ['sampled_at','plant','sample','analyte','result_raw','value','unit','sample_type','qualifier','entered_at']){const td=document.createElement('td');td.textContent=r[k]??'—';tr.append(td)}return tr}));$('pages').textContent=`共 ${total.toLocaleString()} 条 · 第 ${page} / ${Math.max(1,Math.ceil(total/100))} 页`;$('prev').disabled=page<=1;$('next').disabled=page*100>=total;updateLink();$('loading').textContent='已更新'}catch(e){if(id===requestId){queryPending=false;currentData=null;currentQuery=null;$('rows').replaceChildren();for(const key of ['count','numeric','other'])$(key).textContent='—';$('pages').textContent='当前查询失败';renderCharts();error(e);$('loading').textContent='查询失败'}}}
 async function poll(){try{info=await api('/api/lims/status');const s=info.sync;busy=['starting','connecting','fetching'].includes(s.state);$('sync').disabled=busy||!info.sync_enabled;$('sync').title=info.sync_enabled?'':'当前线上部署只查询本地数据库';$('days').disabled=!info.sync_enabled;$('basis').disabled=!info.sync_enabled;const names={not_started:'尚未采集',starting:'准备启动',connecting:'连接数据库中',fetching:'分批取数中',complete:'采集完成',failed:'采集失败'};const status=$('status');status.className='sync '+(s.state==='failed'?'warn':'');status.textContent=`${names[s.state]||s.state}${s.downloaded!==undefined?' · 已读取 '+s.downloaded.toLocaleString()+' 条':''}${s.completed_windows!==undefined?' · 半年窗口 '+s.completed_windows+'/20':''}${s.updated_at?' · '+s.updated_at.replace('T',' '):''}${s.start?' · 录入/采集窗口 '+s.start.slice(0,10)+' 至 '+s.end.slice(0,10):''}${s.error?' · '+s.error:''}`;const c=info.coverage.find(c=>c.origin===$('source').value);$('coverage').textContent=c?`${info.available_plants||c.plants} 个可选装置 · ${c.plants} 个有数据 · ${c.records.toLocaleString()} 条`:'尚无该来源的本地数据';if($('source').value==='pbix')$('coverage').textContent+=' · 文件缓存不代表完整140天采集';if(s.state==='complete'&&lastState&&lastState!=='complete')refresh();lastState=s.state}catch(e){error(e)}}
 for(const k of keys){$(k).addEventListener('change',()=>{selected[k]=[...$(k).selectedOptions].map(o=>o.value);if(k==='plant'){selected.sample=[];selected.analyte=[];selected.sample_type=[];selected.unit=[]}if(k==='sample'){selected.analyte=[];selected.sample_type=[];selected.unit=[]}page=1;refresh()});$(k+'Search')?.addEventListener('input',drawOptions)}
 $('apply').onclick=()=>{page=1;refresh()};$('clear').onclick=()=>{selected=Object.fromEntries(keys.map(k=>[k,[]]));for(const k of ['plant','sample','analyte'])$(k+'Search').value='';$('start').value='';$('end').value='';page=1;refresh()};$('source').onchange=()=>{selected=Object.fromEntries(keys.map(k=>[k,[]]));page=1;poll();refresh()};$('prev').onclick=()=>{page--;refresh()};$('next').onclick=()=>{page++;refresh()};
