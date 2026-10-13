@@ -1,13 +1,11 @@
 {
   "state": "complete",
-  "origin": "live",
+  "days": 40,
   "date_basis": "DATEENTER",
-  "start": "2016-09-11 02:29:07.453000",
-  "end": "2026-09-11 02:29:07.453000",
-  "downloaded": 687951,
-  "source_count": 687951,
-  "step_months": 6,
-  "completed_windows": 20,
-  "max_years": 10,
-  "updated_at": "2026-09-11T02:39:08"
+  "origin": "live",
+  "start": "2026-09-03 00:00:00",
+  "end": "2026-10-13 09:48:31.553000",
+  "downloaded": 8610,
+  "source_count": 8610,
+  "updated_at": "2026-10-13T09:49:19"
 }

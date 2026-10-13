@@ -1,5 +1,7 @@
 import base64
 import os
+import json
+from pathlib import Path
 import unittest
 from unittest.mock import patch
 from app import create_app
@@ -20,7 +22,17 @@ class WebTests(unittest.TestCase):
         self.assertEqual(self.client.get('/api/lims/status').status_code,401)
         self.assertEqual(self.client.get('/').status_code,401)
         self.assertEqual(self.client.get('/',headers=self.auth).status_code,200)
-        self.assertEqual(self.client.get('/api/lims/status',headers=self.auth).json['coverage'][0]['records'],687951)
+        manifest=json.loads((Path(__file__).resolve().parents[1]/'seed/manifest.json').read_text(encoding='utf-8'))
+        self.assertEqual(self.client.get('/api/lims/status',headers=self.auth).json['coverage'][0]['records'],manifest['records'])
+
+    def test_anomaly_routes_are_authenticated_and_validate_dates(self):
+        for path in ['/lims/anomalies','/api/lims/anomalies','/api/lims/anomaly-trend','/api/lims/anomaly-rules']:
+            self.assertEqual(self.client.get(path).status_code,401)
+        response=self.client.get('/lims/anomalies',headers=self.auth)
+        self.assertEqual(response.status_code,200)
+        self.assertIn('近 7 天异常概览',response.get_data(as_text=True))
+        self.assertEqual(len(self.client.get('/api/lims/anomaly-rules',headers=self.auth).json['rules']),91)
+        self.assertEqual(self.client.get('/api/lims/anomaly-trend?start=bad',headers=self.auth).status_code,400)
 
     def test_real_example_and_stream_export(self):
         query={'plant':'三排送','sample':'3P-1402','analyte':'喹啉不溶物','start':'2026-09-01','end':'2026-09-11'}

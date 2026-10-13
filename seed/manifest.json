@@ -1,8 +1,11 @@
 {
   "database": "lims_history.sqlite3",
-  "records": 687951,
-  "sha256": "fda6ab88be7cad2e78e7b37dc316bddcfff878b16067aadab05cf2e493947158",
-  "gzip_sha256": "4e717ce8485a1c61df32e064a8b8515214204b321cb158208fb675a0564bcd63",
+  "records": 694363,
+  "sha256": "0063a7d8f4deb0208964a75bf3567dacda2057383e867e9e151ada9b2aef06a4",
+  "gzip_sha256": "6d890c00c510ee8f000ce30e40876ed690fd873cb93321bd368460d6444a7adb",
   "bytes": 361525248,
-  "gzip_bytes": 48918021
+  "gzip_bytes": 48682133,
+  "snapshot_updated": "2026-10-13",
+  "earliest_sample": "2019-10-24 00:00:00",
+  "latest_sample": "2026-10-12 00:00:00"
 }

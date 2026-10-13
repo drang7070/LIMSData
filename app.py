@@ -8,6 +8,7 @@ from urllib.parse import urlparse
 from flask import Flask, Response, jsonify, render_template, request, stream_with_context
 from bootstrap import bootstrap
 from lims import core
+from lims import anomalies
 
 
 def create_app():
@@ -44,6 +45,22 @@ def create_app():
     @app.get('/lims')
     def index():
         return render_template('index.html')
+
+    @app.get('/lims/anomalies')
+    def anomaly_page():
+        return render_template('anomalies.html')
+
+    @app.get('/api/lims/anomalies')
+    def anomaly_report():
+        return jsonify(anomalies.report(request.args.to_dict(flat=False)))
+
+    @app.get('/api/lims/anomaly-trend')
+    def anomaly_trend():
+        return jsonify(anomalies.trend(request.args.to_dict(flat=False)))
+
+    @app.get('/api/lims/anomaly-rules')
+    def anomaly_rules():
+        return jsonify(anomalies.rules_info())
 
     @app.get('/api/lims/status')
     def status():

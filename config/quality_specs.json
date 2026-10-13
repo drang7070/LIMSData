@@ -1,0 +1,1824 @@
+{
+  "source": "分析频度F0-2026年8月实施 - for许可证检测方法-签字.pdf",
+  "version": "ZBZ00001 F/0",
+  "effective": "2026-08-01",
+  "product_status": "附件无独立产品质量指标表；成品执行SPC，有明确取样位置的中间品条目按位置适用。其余产品限值待补充。",
+  "rules": [
+    {
+      "id": "F0-38-1",
+      "page": 38,
+      "plants": [
+        "一排送"
+      ],
+      "samples": [
+        "一超出",
+        "P-5202",
+        "2P-5202"
+      ],
+      "analytes": [
+        "水分",
+        "水份",
+        "水份（m）",
+        "水分质量分数"
+      ],
+      "unit": "%",
+      "lower": null,
+      "upper": 4,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-38-2",
+      "page": 38,
+      "plants": [
+        "一排送"
+      ],
+      "samples": [
+        "一超出",
+        "P-5202",
+        "2P-5202"
+      ],
+      "analytes": [
+        "残渣"
+      ],
+      "unit": "%",
+      "lower": null,
+      "upper": 1,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-38-3",
+      "page": 38,
+      "plants": [
+        "一排送",
+        "二排送"
+      ],
+      "samples": [
+        "EP出口",
+        "EP出口(II)"
+      ],
+      "analytes": [
+        "焦油雾含量"
+      ],
+      "unit": "mg/m3",
+      "lower": null,
+      "upper": 50,
+      "category": "中间品指标",
+      "effective": "2026-08-01",
+      "note": "源库为g/Nm3，标况基准未确认；不自动将Nm3视为m3"
+    },
+    {
+      "id": "F0-38-4",
+      "page": 38,
+      "plants": [
+        "一排送"
+      ],
+      "samples": [
+        "轻油"
+      ],
+      "analytes": [
+        "180℃前馏出量",
+        "180℃馏出量"
+      ],
+      "unit": "%",
+      "lower": 90,
+      "upper": null,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-38-5",
+      "page": 38,
+      "plants": [
+        "一排送"
+      ],
+      "samples": [
+        "轻油"
+      ],
+      "analytes": [
+        "三苯含量",
+        "BTX总计"
+      ],
+      "unit": "%",
+      "lower": 86,
+      "upper": null,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-38-6",
+      "page": 38,
+      "plants": [
+        "一排送"
+      ],
+      "samples": [
+        "轻油"
+      ],
+      "analytes": [
+        "密度（20℃）",
+        "20℃密度"
+      ],
+      "unit": "g/cm3",
+      "lower": 0.871,
+      "upper": 0.9,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-40-1",
+      "page": 40,
+      "plants": [
+        "三排送"
+      ],
+      "samples": [
+        "轻油"
+      ],
+      "analytes": [
+        "180℃前馏出量",
+        "180℃馏出量"
+      ],
+      "unit": "%",
+      "lower": 90,
+      "upper": null,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-40-2",
+      "page": 40,
+      "plants": [
+        "三排送"
+      ],
+      "samples": [
+        "轻油"
+      ],
+      "analytes": [
+        "三苯含量",
+        "BTX总计"
+      ],
+      "unit": "%",
+      "lower": 86,
+      "upper": null,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-40-3",
+      "page": 40,
+      "plants": [
+        "三排送"
+      ],
+      "samples": [
+        "轻油"
+      ],
+      "analytes": [
+        "密度（20℃）",
+        "20℃密度"
+      ],
+      "unit": "g/cm3",
+      "lower": 0.871,
+      "upper": 0.9,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-39-1",
+      "page": 39,
+      "plants": [
+        "二排送"
+      ],
+      "samples": [
+        "吸苯塔出口"
+      ],
+      "analytes": [
+        "萘含量"
+      ],
+      "unit": "g/m3",
+      "lower": null,
+      "upper": 0.36,
+      "category": "中间品指标",
+      "effective": "2026-08-01",
+      "note": "源库g/Nm3与附件g/m3体积基准不同，待确认"
+    },
+    {
+      "id": "F0-39-2",
+      "page": 39,
+      "plants": [
+        "二排送"
+      ],
+      "samples": [
+        "中冷塔进口"
+      ],
+      "analytes": [
+        "苯含量",
+        "B"
+      ],
+      "unit": "g/m3",
+      "lower": null,
+      "upper": 40,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-39-3",
+      "page": 39,
+      "plants": [
+        "二净化"
+      ],
+      "samples": [
+        "吸氨塔进口"
+      ],
+      "analytes": [
+        "NH3",
+        "NH3含量"
+      ],
+      "unit": "g/m3",
+      "lower": 6,
+      "upper": null,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-39-4",
+      "page": 39,
+      "plants": [
+        "二净化"
+      ],
+      "samples": [
+        "吸收酸"
+      ],
+      "analytes": [
+        "浓度",
+        "硫酸浓度"
+      ],
+      "unit": "%",
+      "lower": null,
+      "upper": null,
+      "category": "中间品指标",
+      "effective": "2026-08-01",
+      "ranges": [
+        [
+          98,
+          null
+        ],
+        [
+          94.5,
+          95.5
+        ]
+      ]
+    },
+    {
+      "id": "F0-39-5",
+      "page": 39,
+      "plants": [
+        "二净化"
+      ],
+      "samples": [
+        "脱硫塔出口"
+      ],
+      "analytes": [
+        "H2S含量"
+      ],
+      "unit": "g/m3",
+      "lower": null,
+      "upper": 0.15,
+      "category": "中间品指标",
+      "effective": "2026-08-01",
+      "condition": "单套≤0.15g/m3，双套≤0.10g/m3；需要运行方式",
+      "note": "三、四期附件原文为mg/m3，按原文保留；源库g/Nm3不可直接比较"
+    },
+    {
+      "id": "F0-40-4",
+      "page": 40,
+      "plants": [
+        "三排送"
+      ],
+      "samples": [
+        "吸苯塔出口"
+      ],
+      "analytes": [
+        "萘含量"
+      ],
+      "unit": "g/m3",
+      "lower": null,
+      "upper": 0.36,
+      "category": "中间品指标",
+      "effective": "2026-08-01",
+      "note": "源库g/Nm3与附件g/m3体积基准不同，待确认"
+    },
+    {
+      "id": "F0-40-5",
+      "page": 40,
+      "plants": [
+        "三排送"
+      ],
+      "samples": [
+        "中冷塔进口"
+      ],
+      "analytes": [
+        "苯含量",
+        "B"
+      ],
+      "unit": "g/m3",
+      "lower": null,
+      "upper": 40,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-40-6",
+      "page": 40,
+      "plants": [
+        "三净化"
+      ],
+      "samples": [
+        "吸氨塔进口"
+      ],
+      "analytes": [
+        "NH3",
+        "NH3含量"
+      ],
+      "unit": "g/m3",
+      "lower": 6,
+      "upper": null,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-40-7",
+      "page": 40,
+      "plants": [
+        "三净化"
+      ],
+      "samples": [
+        "脱硫塔出口"
+      ],
+      "analytes": [
+        "H2S含量"
+      ],
+      "unit": "mg/m3",
+      "lower": null,
+      "upper": 0.1,
+      "category": "中间品指标",
+      "effective": "2026-08-01",
+      "condition": "",
+      "note": "三、四期附件原文为mg/m3，按原文保留；源库g/Nm3不可直接比较"
+    },
+    {
+      "id": "F0-41-1",
+      "page": 41,
+      "plants": [
+        "四排送"
+      ],
+      "samples": [
+        "吸苯塔出口"
+      ],
+      "analytes": [
+        "萘含量"
+      ],
+      "unit": "g/m3",
+      "lower": null,
+      "upper": 0.36,
+      "category": "中间品指标",
+      "effective": "2026-08-01",
+      "note": "源库g/Nm3与附件g/m3体积基准不同，待确认"
+    },
+    {
+      "id": "F0-41-2",
+      "page": 41,
+      "plants": [
+        "四排送"
+      ],
+      "samples": [
+        "中冷塔进口"
+      ],
+      "analytes": [
+        "苯含量",
+        "B"
+      ],
+      "unit": "g/m3",
+      "lower": null,
+      "upper": 40,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-41-3",
+      "page": 41,
+      "plants": [
+        "四净化"
+      ],
+      "samples": [
+        "吸氨塔进口"
+      ],
+      "analytes": [
+        "NH3",
+        "NH3含量"
+      ],
+      "unit": "g/m3",
+      "lower": 6,
+      "upper": null,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-41-4",
+      "page": 41,
+      "plants": [
+        "四净化"
+      ],
+      "samples": [
+        "吸收酸"
+      ],
+      "analytes": [
+        "浓度",
+        "硫酸浓度"
+      ],
+      "unit": "%",
+      "lower": null,
+      "upper": null,
+      "category": "中间品指标",
+      "effective": "2026-08-01",
+      "ranges": [
+        [
+          98,
+          null
+        ],
+        [
+          94.5,
+          95.5
+        ]
+      ]
+    },
+    {
+      "id": "F0-41-5",
+      "page": 41,
+      "plants": [
+        "四净化"
+      ],
+      "samples": [
+        "脱硫塔出口"
+      ],
+      "analytes": [
+        "H2S含量"
+      ],
+      "unit": "mg/m3",
+      "lower": null,
+      "upper": 0.1,
+      "category": "中间品指标",
+      "effective": "2026-08-01",
+      "condition": "",
+      "note": "三、四期附件原文为mg/m3，按原文保留；源库g/Nm3不可直接比较"
+    },
+    {
+      "id": "F0-40-8",
+      "page": 40,
+      "plants": [
+        "三排送"
+      ],
+      "samples": [
+        "三超出",
+        "3P-1402"
+      ],
+      "analytes": [
+        "水分",
+        "水份",
+        "水份（m）",
+        "水分质量分数"
+      ],
+      "unit": "%",
+      "lower": null,
+      "upper": 4,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-40-9",
+      "page": 40,
+      "plants": [
+        "三排送"
+      ],
+      "samples": [
+        "三超出",
+        "3P-1402"
+      ],
+      "analytes": [
+        "残渣"
+      ],
+      "unit": "%",
+      "lower": null,
+      "upper": 1,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-40-10",
+      "page": 40,
+      "plants": [
+        "三排送"
+      ],
+      "samples": [
+        "EP出口"
+      ],
+      "analytes": [
+        "焦油雾含量"
+      ],
+      "unit": "mg/m3",
+      "lower": null,
+      "upper": 50,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-40-11",
+      "page": 40,
+      "plants": [
+        "无水氨"
+      ],
+      "samples": [
+        "无水氨3P-4"
+      ],
+      "analytes": [
+        "氨含量",
+        "含氨"
+      ],
+      "unit": "%",
+      "lower": 99.8,
+      "upper": null,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-41-6",
+      "page": 41,
+      "plants": [
+        "四排送"
+      ],
+      "samples": [
+        "四超出",
+        "4P-1402"
+      ],
+      "analytes": [
+        "水分",
+        "水份",
+        "水份（m）",
+        "水分质量分数"
+      ],
+      "unit": "%",
+      "lower": null,
+      "upper": 4,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-41-7",
+      "page": 41,
+      "plants": [
+        "四排送"
+      ],
+      "samples": [
+        "四超出",
+        "4P-1402"
+      ],
+      "analytes": [
+        "残渣"
+      ],
+      "unit": "%",
+      "lower": null,
+      "upper": 1,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-41-8",
+      "page": 41,
+      "plants": [
+        "四排送"
+      ],
+      "samples": [
+        "EP出口"
+      ],
+      "analytes": [
+        "焦油雾含量"
+      ],
+      "unit": "mg/m3",
+      "lower": null,
+      "upper": 50,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-41-9",
+      "page": 41,
+      "plants": [
+        "无水氨"
+      ],
+      "samples": [
+        "无水氨4P-4"
+      ],
+      "analytes": [
+        "氨含量",
+        "含氨"
+      ],
+      "unit": "%",
+      "lower": 99.8,
+      "upper": null,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-42-1",
+      "page": 42,
+      "plants": [
+        "新焦油萘"
+      ],
+      "samples": [
+        "ALO"
+      ],
+      "analytes": [
+        "含苯",
+        "苯"
+      ],
+      "unit": "%",
+      "lower": 20,
+      "upper": null,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-42-2",
+      "page": 42,
+      "plants": [
+        "新焦油萘"
+      ],
+      "samples": [
+        "ALO"
+      ],
+      "analytes": [
+        "含萘",
+        "萘"
+      ],
+      "unit": "%",
+      "lower": null,
+      "upper": 25,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-42-3",
+      "page": 42,
+      "plants": [
+        "新焦油萘"
+      ],
+      "samples": [
+        "ONW"
+      ],
+      "analytes": [
+        "含酚",
+        "酚含量",
+        "苯酚+酚类"
+      ],
+      "unit": "%",
+      "lower": 0,
+      "upper": 6,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-42-4",
+      "page": 42,
+      "plants": [
+        "新焦油萘"
+      ],
+      "samples": [
+        "ONW"
+      ],
+      "analytes": [
+        "含萘",
+        "萘"
+      ],
+      "unit": "%",
+      "lower": 50,
+      "upper": 70,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-42-5",
+      "page": 42,
+      "plants": [
+        "新焦油萘"
+      ],
+      "samples": [
+        "ONW"
+      ],
+      "analytes": [
+        "甲基萘含量",
+        "甲基萘"
+      ],
+      "unit": "%",
+      "lower": 5,
+      "upper": 20,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-42-6",
+      "page": 42,
+      "plants": [
+        "新焦油萘"
+      ],
+      "samples": [
+        "AATO"
+      ],
+      "analytes": [
+        "咔唑后"
+      ],
+      "unit": "%",
+      "lower": 18,
+      "upper": null,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-42-7",
+      "page": 42,
+      "plants": [
+        "新焦油萘"
+      ],
+      "samples": [
+        "SOP(采AATO)"
+      ],
+      "analytes": [
+        "软化点"
+      ],
+      "unit": "℃",
+      "lower": 35,
+      "upper": 45,
+      "category": "中间品指标",
+      "effective": "2026-08-01",
+      "condition": "普通生产35–45℃；涂料沥青45–70℃，需要生产模式"
+    },
+    {
+      "id": "F0-42-8",
+      "page": 42,
+      "plants": [
+        "新焦油萘"
+      ],
+      "samples": [
+        "SOP(不采AATO)"
+      ],
+      "analytes": [
+        "软化点"
+      ],
+      "unit": "℃",
+      "lower": 35,
+      "upper": 45,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-42-9",
+      "page": 42,
+      "plants": [
+        "新焦油萘"
+      ],
+      "samples": [
+        "95N"
+      ],
+      "analytes": [
+        "含萘",
+        "萘"
+      ],
+      "unit": "%",
+      "lower": 95,
+      "upper": null,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-42-10",
+      "page": 42,
+      "plants": [
+        "新焦油萘"
+      ],
+      "samples": [
+        "CCO"
+      ],
+      "analytes": [
+        "萘"
+      ],
+      "unit": "%",
+      "lower": null,
+      "upper": 15,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-43-1",
+      "page": 43,
+      "plants": [
+        "新焦油萘"
+      ],
+      "samples": [
+        "(95N)CONW",
+        "（95N）CONW"
+      ],
+      "analytes": [
+        "含萘",
+        "萘"
+      ],
+      "unit": "%",
+      "lower": 50,
+      "upper": 80,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-43-2",
+      "page": 43,
+      "plants": [
+        "新焦油萘"
+      ],
+      "samples": [
+        "CMNO"
+      ],
+      "analytes": [
+        "萘"
+      ],
+      "unit": "%",
+      "lower": null,
+      "upper": 8,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-43-3",
+      "page": 43,
+      "plants": [
+        "新焦油萘"
+      ],
+      "samples": [
+        "脱酚CONW"
+      ],
+      "analytes": [
+        "含酚",
+        "酚含量"
+      ],
+      "unit": "%",
+      "lower": null,
+      "upper": 0.6,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-43-4",
+      "page": 43,
+      "plants": [
+        "新焦油萘"
+      ],
+      "samples": [
+        "RPL(送出RPL)",
+        "RPL(送出)"
+      ],
+      "analytes": [
+        "含酚",
+        "酚"
+      ],
+      "unit": "%",
+      "lower": 12,
+      "upper": null,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-43-5",
+      "page": 43,
+      "plants": [
+        "新焦油萘"
+      ],
+      "samples": [
+        "CCO(中间槽样)"
+      ],
+      "analytes": [
+        "水分",
+        "水份",
+        "水份（m）",
+        "水分质量分数"
+      ],
+      "unit": "%",
+      "lower": null,
+      "upper": 1,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-43-6",
+      "page": 43,
+      "plants": [
+        "新焦油萘"
+      ],
+      "samples": [
+        "CCO(中间槽样)"
+      ],
+      "analytes": [
+        "密度（20℃）",
+        "密度(D-杂酚油)",
+        "20℃密度"
+      ],
+      "unit": "g/cm3",
+      "lower": 0.89,
+      "upper": 1,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-43-7",
+      "page": 43,
+      "plants": [
+        "新焦油萘"
+      ],
+      "samples": [
+        "DMNO T-5217/18"
+      ],
+      "analytes": [
+        "含萘",
+        "萘"
+      ],
+      "unit": "%",
+      "lower": null,
+      "upper": 8,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-43-8",
+      "page": 43,
+      "plants": [
+        "新焦油萘"
+      ],
+      "samples": [
+        "DMNO T-5217/18"
+      ],
+      "analytes": [
+        "甲基萘含量",
+        "甲基萘"
+      ],
+      "unit": "%",
+      "lower": 50,
+      "upper": null,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-43-9",
+      "page": 43,
+      "plants": [
+        "新焦油萘"
+      ],
+      "samples": [
+        "DMNO T-5217/18"
+      ],
+      "analytes": [
+        "水分",
+        "水份",
+        "水份（m）",
+        "水分质量分数"
+      ],
+      "unit": "%",
+      "lower": null,
+      "upper": 0.5,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-43-10",
+      "page": 43,
+      "plants": [
+        "新焦油萘"
+      ],
+      "samples": [
+        "新混油"
+      ],
+      "analytes": [
+        "Na离子",
+        "钠离子含量（质量分数）"
+      ],
+      "unit": "mg/kg",
+      "lower": null,
+      "upper": 60,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-44-1",
+      "page": 44,
+      "plants": [
+        "新酚"
+      ],
+      "samples": [
+        "粗酚P-2415"
+      ],
+      "analytes": [
+        "水分",
+        "水份",
+        "水份（m）",
+        "水分质量分数"
+      ],
+      "unit": "%",
+      "lower": null,
+      "upper": 20,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-45-1",
+      "page": 45,
+      "plants": [
+        "三期精萘",
+        "蒽萘"
+      ],
+      "samples": [
+        "3T-7117槽样",
+        "3T-7117 槽样",
+        "3T-7117"
+      ],
+      "analytes": [
+        "萘含量",
+        "萘"
+      ],
+      "unit": "%",
+      "lower": 98.5,
+      "upper": null,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-45-2",
+      "page": 45,
+      "plants": [
+        "三期精萘",
+        "蒽萘"
+      ],
+      "samples": [
+        "提纯5排料样",
+        "提纯5 排料样",
+        "提纯5排料"
+      ],
+      "analytes": [
+        "萘含量",
+        "萘"
+      ],
+      "unit": "%",
+      "lower": 99.2,
+      "upper": null,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-45-3",
+      "page": 45,
+      "plants": [
+        "三期精萘",
+        "蒽萘"
+      ],
+      "samples": [
+        "PNS 3T-7110",
+        "PNS3T-7110",
+        "3T-7110"
+      ],
+      "analytes": [
+        "萘含量",
+        "萘"
+      ],
+      "unit": "%",
+      "lower": 60,
+      "upper": null,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-46-1",
+      "page": 46,
+      "plants": [
+        "沥青焦"
+      ],
+      "samples": [
+        "坑焦(NC-R')(SC-4103)"
+      ],
+      "analytes": [
+        "挥发分",
+        "挥发份",
+        "焦的挥发份"
+      ],
+      "unit": "%",
+      "lower": 4,
+      "upper": 10,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-46-2",
+      "page": 46,
+      "plants": [
+        "沥青焦"
+      ],
+      "samples": [
+        "NC-R(C组皮带)(SC-4211)"
+      ],
+      "analytes": [
+        "挥发分",
+        "挥发份",
+        "焦的挥发份"
+      ],
+      "unit": "%",
+      "lower": 4,
+      "upper": 10,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-46-3",
+      "page": 46,
+      "plants": [
+        "沥青焦"
+      ],
+      "samples": [
+        "焦化重油(SC-108)"
+      ],
+      "analytes": [
+        "初馏点"
+      ],
+      "unit": "℃",
+      "lower": 250,
+      "upper": null,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-46-4",
+      "page": 46,
+      "plants": [
+        "沥青焦"
+      ],
+      "samples": [
+        "焦化轻油(SC-105)"
+      ],
+      "analytes": [
+        "280℃馏出量",
+        "初馏点~280℃馏出量"
+      ],
+      "unit": "%",
+      "lower": 70,
+      "upper": null,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-46-5",
+      "page": 46,
+      "plants": [
+        "沥青焦"
+      ],
+      "samples": [
+        "轻相(SC-409)",
+        "轻相LP(SC-409)"
+      ],
+      "analytes": [
+        "QI",
+        "喹啉不溶物",
+        "喹啉不溶物W(%)"
+      ],
+      "unit": "%",
+      "lower": null,
+      "upper": 0.04,
+      "category": "中间品指标",
+      "effective": "2026-08-01",
+      "allowed_text": [
+        "痕迹",
+        "微量"
+      ]
+    },
+    {
+      "id": "F0-46-6",
+      "page": 46,
+      "plants": [
+        "沥青焦"
+      ],
+      "samples": [
+        "精制沥青槽RP(SC-407)",
+        "精制沥青(SC-407)"
+      ],
+      "analytes": [
+        "QI",
+        "喹啉不溶物",
+        "喹啉不溶物W(%)"
+      ],
+      "unit": "%",
+      "lower": null,
+      "upper": 0.1,
+      "category": "中间品指标",
+      "effective": "2026-08-01",
+      "allowed_text": [
+        "痕迹",
+        "微量",
+        "少量"
+      ]
+    },
+    {
+      "id": "F0-46-7",
+      "page": 46,
+      "plants": [
+        "沥青焦"
+      ],
+      "samples": [
+        "回收溶剂RS(SC-411)"
+      ],
+      "analytes": [
+        "密度（60℃）",
+        "60℃密度"
+      ],
+      "unit": "g/cm3",
+      "lower": null,
+      "upper": 0.97,
+      "category": "中间品指标",
+      "effective": "2026-08-01",
+      "note": "附件未写单位；按源库明确的密度单位g/cm3映射"
+    },
+    {
+      "id": "F0-46-8",
+      "page": 46,
+      "plants": [
+        "沥青焦"
+      ],
+      "samples": [
+        "混配油MOP(SC-414)"
+      ],
+      "analytes": [
+        "QI",
+        "喹啉不溶物",
+        "喹啉不溶物W(%)"
+      ],
+      "unit": "%",
+      "lower": 6,
+      "upper": null,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-48-1",
+      "page": 48,
+      "plants": [
+        "针状焦二期"
+      ],
+      "samples": [
+        "坑焦(NC-R')(2SC-4103)"
+      ],
+      "analytes": [
+        "挥发分",
+        "挥发份",
+        "焦的挥发份"
+      ],
+      "unit": "%",
+      "lower": 4,
+      "upper": 10,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-48-2",
+      "page": 48,
+      "plants": [
+        "针状焦二期"
+      ],
+      "samples": [
+        "焦化重油(2SC-108)"
+      ],
+      "analytes": [
+        "初馏点"
+      ],
+      "unit": "℃",
+      "lower": 250,
+      "upper": null,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-48-3",
+      "page": 48,
+      "plants": [
+        "针状焦二期"
+      ],
+      "samples": [
+        "焦化轻油(2SC-105)"
+      ],
+      "analytes": [
+        "280℃馏出量",
+        "初馏点~280℃馏出量"
+      ],
+      "unit": "%",
+      "lower": 70,
+      "upper": null,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-48-4",
+      "page": 48,
+      "plants": [
+        "针状焦二期"
+      ],
+      "samples": [
+        "轻相(2SC-409)",
+        "轻相LP(2SC-409)"
+      ],
+      "analytes": [
+        "QI",
+        "喹啉不溶物",
+        "喹啉不溶物W(%)"
+      ],
+      "unit": "%",
+      "lower": null,
+      "upper": 0.04,
+      "category": "中间品指标",
+      "effective": "2026-08-01",
+      "allowed_text": [
+        "痕迹",
+        "微量"
+      ]
+    },
+    {
+      "id": "F0-48-5",
+      "page": 48,
+      "plants": [
+        "针状焦二期"
+      ],
+      "samples": [
+        "精制沥青槽RP(2SC-407)",
+        "精制沥青(2SC-407)"
+      ],
+      "analytes": [
+        "QI",
+        "喹啉不溶物",
+        "喹啉不溶物W(%)"
+      ],
+      "unit": "%",
+      "lower": null,
+      "upper": 0.1,
+      "category": "中间品指标",
+      "effective": "2026-08-01",
+      "allowed_text": [
+        "痕迹",
+        "微量",
+        "少量"
+      ]
+    },
+    {
+      "id": "F0-48-6",
+      "page": 48,
+      "plants": [
+        "针状焦二期"
+      ],
+      "samples": [
+        "回收溶剂RS(2SC-411)"
+      ],
+      "analytes": [
+        "密度（60℃）",
+        "60℃密度"
+      ],
+      "unit": "g/cm3",
+      "lower": null,
+      "upper": 0.97,
+      "category": "中间品指标",
+      "effective": "2026-08-01",
+      "note": "附件未写单位；按源库明确的密度单位g/cm3映射"
+    },
+    {
+      "id": "F0-48-7",
+      "page": 48,
+      "plants": [
+        "针状焦二期"
+      ],
+      "samples": [
+        "混配油MOP(2SC-414)"
+      ],
+      "analytes": [
+        "QI",
+        "喹啉不溶物",
+        "喹啉不溶物W(%)"
+      ],
+      "unit": "%",
+      "lower": 6,
+      "upper": null,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-46-9",
+      "page": 46,
+      "plants": [
+        "沥青焦"
+      ],
+      "samples": [
+        "煅后(NC)(SC-4232)"
+      ],
+      "analytes": [
+        "真比重",
+        "真比重(d30)"
+      ],
+      "unit": "1",
+      "lower": 2.13,
+      "upper": null,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-47-1",
+      "page": 47,
+      "plants": [
+        "沥青焦"
+      ],
+      "samples": [
+        "LPC-R(坑焦)"
+      ],
+      "analytes": [
+        "挥发分",
+        "挥发份",
+        "焦的挥发份"
+      ],
+      "unit": "%",
+      "lower": 4,
+      "upper": 10,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-47-2",
+      "page": 47,
+      "plants": [
+        "沥青焦"
+      ],
+      "samples": [
+        "LPC-R C组皮带"
+      ],
+      "analytes": [
+        "挥发分",
+        "挥发份",
+        "焦的挥发份"
+      ],
+      "unit": "%",
+      "lower": 4,
+      "upper": 10,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-47-3",
+      "page": 47,
+      "plants": [
+        "沥青焦"
+      ],
+      "samples": [
+        "HO(S-108)",
+        "焦化重油(S-108)"
+      ],
+      "analytes": [
+        "初馏点"
+      ],
+      "unit": "℃",
+      "lower": 250,
+      "upper": null,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-47-4",
+      "page": 47,
+      "plants": [
+        "沥青焦"
+      ],
+      "samples": [
+        "LO(S-105)",
+        "焦化轻油(S-105)"
+      ],
+      "analytes": [
+        "280℃馏出量",
+        "初馏点~280℃馏出量"
+      ],
+      "unit": "%",
+      "lower": 70,
+      "upper": null,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-49-1",
+      "page": 49,
+      "plants": [
+        "针状焦二期"
+      ],
+      "samples": [
+        "LPC-R(2坑焦)"
+      ],
+      "analytes": [
+        "挥发分",
+        "挥发份",
+        "焦的挥发份"
+      ],
+      "unit": "%",
+      "lower": 4,
+      "upper": 10,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-49-2",
+      "page": 49,
+      "plants": [
+        "针状焦二期"
+      ],
+      "samples": [
+        "HO(2S-108)",
+        "焦化重油(2S-108)"
+      ],
+      "analytes": [
+        "初馏点"
+      ],
+      "unit": "℃",
+      "lower": 250,
+      "upper": null,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-49-3",
+      "page": 49,
+      "plants": [
+        "针状焦二期"
+      ],
+      "samples": [
+        "LO(2S-105)",
+        "焦化轻油(2S-105)"
+      ],
+      "analytes": [
+        "280℃馏出量",
+        "初馏点~280℃馏出量"
+      ],
+      "unit": "%",
+      "lower": 70,
+      "upper": null,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-47-5",
+      "page": 47,
+      "plants": [
+        "沥青焦"
+      ],
+      "samples": [
+        "LPC(成品皮带)"
+      ],
+      "analytes": [
+        "真比重",
+        "真比重(d30)",
+        "焦的真比重"
+      ],
+      "unit": "1",
+      "lower": 1.98,
+      "upper": null,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-50-1",
+      "page": 50,
+      "plants": [
+        "苯加氢"
+      ],
+      "samples": [
+        "重苯(2AP-610801)"
+      ],
+      "analytes": [
+        "二甲苯含量",
+        "二甲苯"
+      ],
+      "unit": "%",
+      "lower": null,
+      "upper": 1.5,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-50-2",
+      "page": 50,
+      "plants": [
+        "苯加氢"
+      ],
+      "samples": [
+        "BTXS加氢油(2AP-610601)"
+      ],
+      "analytes": [
+        "硫含量",
+        "硫"
+      ],
+      "unit": "mg/kg",
+      "lower": null,
+      "upper": 1,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-50-3",
+      "page": 50,
+      "plants": [
+        "苯加氢"
+      ],
+      "samples": [
+        "BTXS加氢油(2AP-610601)"
+      ],
+      "analytes": [
+        "噻吩含量",
+        "噻吩"
+      ],
+      "unit": "mg/kg",
+      "lower": null,
+      "upper": 2,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-50-4",
+      "page": 50,
+      "plants": [
+        "苯加氢"
+      ],
+      "samples": [
+        "XS馏份(2AP-620201)"
+      ],
+      "analytes": [
+        "甲苯含量",
+        "甲苯"
+      ],
+      "unit": "%",
+      "lower": null,
+      "upper": 1.5,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-50-5",
+      "page": 50,
+      "plants": [
+        "苯加氢"
+      ],
+      "samples": [
+        "非芳烃(2AP-630302)"
+      ],
+      "analytes": [
+        "苯含量",
+        "苯"
+      ],
+      "unit": "%",
+      "lower": null,
+      "upper": 20,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-50-6",
+      "page": 50,
+      "plants": [
+        "苯加氢"
+      ],
+      "samples": [
+        "非芳烃(2AP-630302)"
+      ],
+      "analytes": [
+        "NFM含量",
+        "NFM"
+      ],
+      "unit": "mg/kg",
+      "lower": null,
+      "upper": 2,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-50-7",
+      "page": 50,
+      "plants": [
+        "苯加氢"
+      ],
+      "samples": [
+        "B/T芳香烃(2AP-630501)"
+      ],
+      "analytes": [
+        "NFM含量",
+        "NFM"
+      ],
+      "unit": "mg/kg",
+      "lower": null,
+      "upper": 1,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-50-8",
+      "page": 50,
+      "plants": [
+        "苯加氢"
+      ],
+      "samples": [
+        "C9馏份(2AP-640101)"
+      ],
+      "analytes": [
+        "二甲苯含量",
+        "二甲苯"
+      ],
+      "unit": "%",
+      "lower": null,
+      "upper": 60,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-51-1",
+      "page": 51,
+      "plants": [
+        "古马隆"
+      ],
+      "samples": [
+        "NOH"
+      ],
+      "analytes": [
+        "茚含量",
+        "茚"
+      ],
+      "unit": "%",
+      "lower": null,
+      "upper": 5,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-51-2",
+      "page": 51,
+      "plants": [
+        "古马隆"
+      ],
+      "samples": [
+        "HSN"
+      ],
+      "analytes": [
+        "古茚含量",
+        "古马隆+茚"
+      ],
+      "unit": "%",
+      "lower": null,
+      "upper": 25,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-51-3",
+      "page": 51,
+      "plants": [
+        "古马隆"
+      ],
+      "samples": [
+        "LSN"
+      ],
+      "analytes": [
+        "古茚含量",
+        "古马隆+茚"
+      ],
+      "unit": "%",
+      "lower": null,
+      "upper": 15,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    },
+    {
+      "id": "F0-51-4",
+      "page": 51,
+      "plants": [
+        "古马隆"
+      ],
+      "samples": [
+        "CG",
+        "CG流样"
+      ],
+      "analytes": [
+        "软化点",
+        "古马隆软化点"
+      ],
+      "unit": "℃",
+      "lower": 80,
+      "upper": 130,
+      "category": "中间品指标",
+      "effective": "2026-08-01"
+    }
+  ]
+}
