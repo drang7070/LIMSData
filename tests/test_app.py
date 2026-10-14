@@ -30,7 +30,7 @@ class WebTests(unittest.TestCase):
             self.assertEqual(self.client.get(path).status_code,401)
         response=self.client.get('/lims/anomalies',headers=self.auth)
         self.assertEqual(response.status_code,200)
-        self.assertIn('近 7 天异常概览',response.get_data(as_text=True))
+        self.assertIn('近1天异常概览',response.get_data(as_text=True))
         self.assertEqual(len(self.client.get('/api/lims/anomaly-rules',headers=self.auth).json['rules']),91)
         self.assertEqual(self.client.get('/api/lims/anomaly-trend?start=bad',headers=self.auth).status_code,400)
 

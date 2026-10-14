@@ -219,8 +219,8 @@ def load_series(db, key, start, end):
     return sorted(prior+rows, key=lambda r:(r['sampled_at'],r['id']))
 
 
-def _report(today, db_factory):
-    start, end = (today-timedelta(days=6)).isoformat(), (today+timedelta(days=1)).isoformat()
+def _report(today, db_factory, days):
+    start, end = (today-timedelta(days=days-1)).isoformat(), (today+timedelta(days=1)).isoformat()
     config = specifications()
     items, pending, count = [], [], 0
     with closing(db_factory()) as db:
@@ -246,12 +246,15 @@ def _report(today, db_factory):
                                   points=points[-10:], specs=[dict(r,limits=limits_text(r)) for r in applicable],
                                   pending=statuses))
     sort_items(items)
-    return dict(window_start=start, window_end=today.isoformat(), latest_sample=latest,
+    return dict(days=days,window_start=start, window_end=today.isoformat(), latest_sample=latest,
                 stale=not recent, recent_records=count, checked_series=len(recent),
                 plants=sorted(plants),items=items, pending_series=pending, product_status=config['product_status'])
 
 
 def report(params, *, today=None, db_factory=None):
+    days=int(params.get('days',['1'])[0])
+    if not 1<=days<=90:
+        raise ValueError('异常查看天数必须为1至90的整数')
     today = today or china_today()
     db_factory = db_factory or core.connect
     # Cache only the unfiltered report and invalidate on SQLite/WAL changes.
@@ -259,13 +262,13 @@ def report(params, *, today=None, db_factory=None):
     if db_factory is core.connect or db_factory.__module__ == 'mes_agent.lims':
         database = db_factory.__globals__['DB']
         paths = [database, Path(str(database)+'-wal'), SPEC_PATH]
-        cache_key = (today.isoformat(), tuple((str(p),p.stat().st_mtime_ns,p.stat().st_size) for p in paths if p.exists()))
+        cache_key = (today.isoformat(), days, tuple((str(p),p.stat().st_mtime_ns,p.stat().st_size) for p in paths if p.exists()))
     with _LOCK:
         cached = _CACHE.get('report')
         if cache_key and cached and cached[0]==cache_key and time.monotonic()-cached[1]<60:
             data = cached[2]
         else:
-            data = _report(today,db_factory)
+            data = _report(today,db_factory,days)
             if cache_key:
                 _CACHE['report']=(cache_key,time.monotonic(),data)
     items = data['items']

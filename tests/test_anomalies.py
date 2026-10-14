@@ -109,7 +109,7 @@ class AnomalyTests(unittest.TestCase):
         self.insert('2026-09-11',7)  # Inclusive final day.
         self.insert('2026-09-12',100)  # Future result excluded.
         today=date(2026,9,11)
-        report=a.report({},today=today,db_factory=self.connect)
+        report=a.report({'days':['7']},today=today,db_factory=self.connect)
         self.assertEqual(report['window_start'],'2026-09-05')
         self.assertEqual(report['total'],1)
         item=report['items'][0]
@@ -129,7 +129,7 @@ class AnomalyTests(unittest.TestCase):
     def test_isolation_filters_and_invalid_range(self):
         self.insert('2026-09-10',10)
         self.insert('2026-09-10',10,unit='mg/L')
-        result=a.report({'kind':['spec']},today=date(2026,9,11),db_factory=self.connect)
+        result=a.report({'kind':['spec'],'days':['7']},today=date(2026,9,11),db_factory=self.connect)
         self.assertEqual(result['total'],1)
         self.assertEqual(result['checked_series'],2)
         self.assertEqual(a.report({'plant':["' OR 1=1 --"]},today=date(2026,9,11),db_factory=self.connect)['total'],0)
@@ -137,6 +137,22 @@ class AnomalyTests(unittest.TestCase):
             a.trend({**{k:[v] for k,v in self.key.items()},'start':['2026-09-10']},db_factory=self.connect)
         with self.assertRaises(ValueError):
             a.trend({**{k:[v] for k,v in self.key.items()},'start':['2026-10-12'],'end':['2099-01-01']},db_factory=self.connect)
+
+    def test_selectable_recent_days_and_validation(self):
+        for day in [12,13,14,15]:
+            self.insert(f'2026-10-{day}',5)
+        today=date(2026,10,14)
+        one=a.report({},today=today,db_factory=self.connect)
+        two=a.report({'days':['2']},today=today,db_factory=self.connect)
+        seven=a.report({'days':['7']},today=today,db_factory=self.connect)
+        self.assertEqual(one['window_start'],'2026-10-14')
+        self.assertEqual(two['window_start'],'2026-10-13')
+        self.assertEqual(seven['window_start'],'2026-10-08')
+        self.assertEqual([d['recent_records'] for d in [one,two,seven]],[1,2,3])
+        self.assertEqual([d['items'][0]['abnormal_points'] for d in [one,two,seven]],[1,2,3])
+        for val in ['0','91','1.5','abc']:
+            with self.assertRaises(ValueError):
+                a.report({'days':[val]},today=today,db_factory=self.connect)
 
 
 if __name__=='__main__':
