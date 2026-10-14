@@ -180,6 +180,32 @@ def series_where(key):
     return 'origin=? AND ' + ' AND '.join(f'{field}=?' for field in KEYS), ['live', *[key[f] for f in KEYS]]
 
 
+def severity(points):
+    """Comparable cross-unit priority from recent anomalous points only."""
+    scored=[]
+    for point in points:
+        baseline=point.get('baseline')
+        if baseline and point['value'] is not None:
+            tolerance=max(1e-12,abs(baseline['center'])*1e-12)
+            if baseline['sigma']>tolerance:
+                z=abs(point['value']-baseline['center'])/baseline['sigma']
+                if math.isfinite(z):
+                    scored.append((z,point['sampled_at'],point))
+    codes=sorted({r['code'] for p in points for r in p['reasons'] if r['kind']=='spc'})
+    worst=max(scored,key=lambda s:(s[0],s[1])) if scored else None
+    return dict(max_sigma=worst[0] if worst else None,spc_rule_count=len(codes),
+                spc_codes=codes,point=worst[2] if worst else points[-1])
+
+
+def sort_items(items):
+    # Quality violations always precede SPC-only alerts, across all pages.
+    items.sort(key=lambda s:(
+        'spec' in s['kinds'],
+        s['severity']['max_sigma'] if s['severity']['max_sigma'] is not None else -1,
+        s['severity']['spc_rule_count'],s['abnormal_points'],s['last_abnormal'],
+        s['plant'],s['sample'],s['analyte'],s['unit'],s['sample_type']),reverse=True)
+
+
 def load_series(db, key, start, end):
     where, args = series_where(key)
     cols = 'id,sampled_at,result_raw,value,unit'
@@ -213,10 +239,11 @@ def _report(today, db_factory):
             if bad:
                 kinds = sorted({r['kind'] for p in bad for r in p['reasons']})
                 items.append(dict(**key, abnormal_points=len(bad), last_abnormal=bad[-1]['sampled_at'],
+                                  severity=severity(bad),
                                   latest=targets[-1], kinds=kinds, reasons=bad[-1]['reasons'],
                                   points=points[-10:], specs=[dict(r,limits=limits_text(r)) for r in applicable],
                                   pending=statuses))
-    items.sort(key=lambda s:(s['last_abnormal'],s['plant'],s['sample'],s['analyte']),reverse=True)
+    sort_items(items)
     return dict(window_start=start, window_end=today.isoformat(), latest_sample=latest,
                 stale=not recent, recent_records=count, checked_series=len(recent),
                 plants=sorted(plants),items=items, pending_series=pending, product_status=config['product_status'])

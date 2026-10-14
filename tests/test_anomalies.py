@@ -37,6 +37,30 @@ class AnomalyTests(unittest.TestCase):
         self.assertEqual(a.spc_signals([1],1,0),[])
         self.assertEqual(a.spc_signals([2],1,0),['ZERO'])
 
+    def test_priority_spec_first_then_sigma_rules_and_frequency(self):
+        def item(name,kinds,z,rules=1,count=1):
+            return dict(plant='test',sample=name,analyte='item',unit='%',sample_type='中间品',
+                        kinds=kinds,severity=dict(max_sigma=z,spc_rule_count=rules),
+                        abnormal_points=count,last_abnormal='2026-10-12')
+        items=[item('spc extreme',['spc'],100),item('spec mild',['spec'],1),
+               item('spec extreme',['spec','spc'],5),item('spc no sigma',['spc'],None),
+               item('spc more rules',['spc'],4,3),item('spc more occurrences',['spc'],4,1,3),
+               item('spc fewer occurrences',['spc'],4,1,1)]
+        a.sort_items(items)
+        self.assertEqual([s['sample'] for s in items],['spec extreme','spec mild','spc extreme',
+                         'spc more rules','spc more occurrences','spc fewer occurrences','spc no sigma'])
+
+    def test_severity_uses_worst_point_and_handles_zero_sigma(self):
+        def point(day,value,sigma,code):
+            return dict(sampled_at=day,value=value,baseline=dict(center=10,sigma=sigma),
+                        reasons=[dict(kind='spc',code=code)])
+        points=[point('2026-10-08',30,2,'R1'),point('2026-10-12',12,2,'R4')]
+        result=a.severity(points)
+        self.assertEqual(result['max_sigma'],10)
+        self.assertEqual(result['point']['sampled_at'],'2026-10-08')
+        self.assertEqual(result['spc_rule_count'],2)
+        self.assertIsNone(a.severity([point('2026-10-12',12,0,'ZERO')])['max_sigma'])
+
     def test_spec_inclusive_and_no_fuzzy_or_wrong_unit(self):
         rule=next(r for r in a.specifications()['rules'] if a.matches(r,self.key))
         row=dict(self.key,sampled_at='2026-09-01',result_raw='4')
