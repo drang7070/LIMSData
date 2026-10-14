@@ -56,6 +56,8 @@ python app.py
 
 ## 网页使用
 
+手机访问自动启用手机版（手机设备标识或屏幕宽度不超过820px），顶部“显示模式”可手动选择手机版、桌面版或自动识别；浏览器记住手动选择。趋势查询和异常页面都支持手机布局：底部导航、44px触控操作区、可折叠筛选与采集设置、竖向明细卡片。手机点击趋势测点可打开详情，查看原值、异常原因和未判定项；日期范围和保留曲线功能仍可使用。也可用 `?view=mobile` 或 `?view=desktop` 指定入口布局。
+
 装置、样品名、分析项、样品类型、单位支持联动和多选，取样日期含起止当天。筛选结果可收藏为URL，CSV按当前筛选流式导出全部明细。同单位同样品同分析项同日结果取平均；不同样品、单位不会混合平均。
 
 对比不同样品或指标时，先查询第一组数据，点击“保留当前曲线”，再更改筛选并查询。保留曲线以虚线显示，新查询以实线显示；可以连续保留多组，逐条移除或一键清空。无数据或查询失败不会清除已保留曲线。
@@ -117,6 +119,6 @@ python bootstrap.py
 python -m unittest discover -s tests -v
 ```
 
-原历史回溯核对记录在 `seed/lims_backfill_acceptance.json`、`seed/lims_backfill_status.json`；本次增量采集核对在 `seed/lims_sync_status.json`。24项测试覆盖访问控制、真实验收样本、CSV、日期边界、半年窗口连续性、进程锁、SPC六条规则、定性QI、质量限值、单位隔离、近7天筛选、均值不掩盖原始超限和备份后快照合并。GitHub Actions在Linux上执行数据库恢复及测试。
+原历史回溯核对记录在 `seed/lims_backfill_acceptance.json`、`seed/lims_backfill_status.json`；本次增量采集核对在 `seed/lims_sync_status.json`。25项测试覆盖访问控制、真实验收样本、CSV、日期边界、半年窗口连续性、进程锁、SPC六条规则、定性QI、质量限值、单位隔离、近7天筛选、均值不掩盖原始超限和备份后快照合并。GitHub Actions在Linux上执行数据库恢复及测试。
 
 已在Windows上验证压缩包SHA256、SQLite完整性及694,363条行数，并使用Waitress独立启动查询。Playwright使用真实近7天数据验证最近10点、红色异常标记、日期展开与恢复、范围调整后的判定一致性及指标超限筛选。Docker配置随包提供，本机未安装Docker，未在本机执行容器构建。

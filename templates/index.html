@@ -1,8 +1,9 @@
 <!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><link rel="icon" href="data:,"><meta name="viewport" content="width=device-width,initial-scale=1"><title>化验室 · 全装置分析趋势</title>
+<script src="/lims-assets/device.js"></script>
 <style>
 :root{font-family:"Microsoft YaHei",system-ui,sans-serif;color:#203547;background:#eef3f7;font-size:14px}*{box-sizing:border-box}body{margin:0}header{background:#153748;color:white;padding:24px 32px;display:flex;align-items:center;justify-content:space-between;gap:20px}h1{font-size:24px;margin:0 0 8px}h2{font-size:18px;margin:0}a{color:#087f8c}header a{color:#cbeaf0}button,input,select{font:inherit;border:1px solid #c6d4dd;border-radius:6px;padding:8px;background:white;color:#203547}button{cursor:pointer}button.primary{background:#087f8c;color:white;border-color:#087f8c}button:disabled{opacity:.5;cursor:wait}main{max-width:1680px;margin:auto;padding:20px 28px}section,.card{background:white;border:1px solid #dce5ec;border-radius:10px;padding:18px;margin-bottom:16px}.row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.row.between{justify-content:space-between}label{display:flex;gap:7px;align-items:center}small,.muted{color:#647b8b}.sync{margin-top:12px;line-height:1.7;overflow-wrap:anywhere}.warn{color:#96550b;background:#fff4df;border-left:4px solid #e7ad43;padding:10px}.good{color:#156444}.layout{display:grid;grid-template-columns:270px minmax(0,1fr);gap:18px}.slicers{padding:16px}.facet{border-bottom:1px solid #e4ebef;padding-bottom:12px;margin-top:12px}.facet label{font-weight:600;margin-bottom:7px}.facet input{width:100%;margin-bottom:6px}.facet select{width:100%;height:105px;padding:4px;border-radius:4px}.facet option{padding:4px}.facet select:focus{outline:2px solid #34a5b1}.dates{display:grid;grid-template-columns:1fr 1fr;gap:12px}.dates label{display:block}.dates input{width:100%;margin-top:8px}.metrics{display:flex;gap:32px;margin:18px 0;flex-wrap:wrap}.metric b{display:block;font-size:24px;color:#153748}.metric span{font-size:12px;color:#647b8b}.chart{min-height:320px;position:relative}svg{display:block;width:100%;height:330px}.chart-empty{padding:65px 20px;text-align:center;color:#647b8b;line-height:2}.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;padding:8px 0}.legend span{display:flex;align-items:center;gap:5px}.dot{width:9px;height:9px;border-radius:50%;display:inline-block}.table-scroll{overflow:auto;max-height:430px}table{width:100%;border-collapse:collapse;white-space:nowrap;font-size:12px}th,td{text-align:left;padding:9px 12px;border-bottom:1px solid #e5edf2}th{position:sticky;top:0;background:#f4f7fa}tr:hover{background:#edf7f8}#error{display:none;margin-bottom:15px}.pill{border-radius:20px;background:#e8f4f4;padding:5px 10px;color:#08717b;font-size:12px}.tooltip{position:fixed;pointer-events:none;background:#153748;color:white;padding:10px;z-index:10;white-space:pre-line;border-radius:6px;font-size:12px;display:none}.charts-heading{margin:15px 0 2px}.subtitle{line-height:1.7;font-size:13px}#source{max-width:290px}@media(max-width:850px){header{padding:20px;align-items:flex-start}main{padding:12px}.layout{grid-template-columns:1fr}.slicers{display:grid;grid-template-columns:1fr 1fr;gap:12px}.slicers>.row{grid-column:1/-1}.facet{margin:0}.metrics{gap:20px}}
-</style></head><body>
+</style><link rel="stylesheet" href="/lims-assets/mobile.css"></head><body>
 <header><div><h1>化验室 · 全装置分析趋势</h1><div class="subtitle">装置 / 样品 / 分析项 / 取样时间 · 本地历史查询</div></div><div class="row"><a href="/lims/anomalies">异常样品（近7天）</a><a href="/">LIMSData 首页</a></div></header>
 <main><div id="error" class="warn" role="alert"></div>
 <section><div class="row between"><div class="row"><h2>数据采集</h2><span class="pill">LIMS_DATA · finalresult_all</span></div><div class="row"><label>回溯天数 <input id="days" type="number" min="1" max="3650" value="140" style="width:90px"></label><label>采集依据 <select id="basis"><option value="DATEENTER">录入时间（PBI原规则）</option><option value="sampdate">取样时间</option></select></label><button id="sync" class="primary">采集到本地</button></div></div><div id="status" class="sync" aria-live="polite">正在读取数据状态…</div></section>
@@ -71,11 +72,11 @@ function renderCharts(data){
     if(!finite.length){const p=document.createElement('p');p.textContent='此组只有文本或无效结果，请查看当前查询明细。';root.append(p);continue}
     let low=normalized?0:finite.reduce((a,p)=>Math.min(a,p.value),Infinity),high=normalized?100:finite.reduce((a,p)=>Math.max(a,p.value),-Infinity);
     const pad=(high-low)*.12||Math.max(Math.abs(high)*.05,.1);low-=pad;high+=pad;
-    const W=1050,H=330,L=72,R=25,T=28,B=45;
+    const mobile=window.LimsDevice?.isMobile();const W=mobile?480:1050,H=330,L=mobile?84:72,R=25,T=28,B=45;
     const x=t=>L+(maxT===minT?.5:(t-minT)/(maxT-minT))*(W-L-R),y=v=>T+(high-v)/(high-low)*(H-T-B);
     const svg=svgNode('svg',{viewBox:`0 0 ${W} ${H}`,role:'img','aria-label':`${normalized?'变化幅度':'分析趋势'}，${members.length}条曲线，${finite.length}个数值时刻`});
     for(let i=0;i<5;i++){const v=normalized?i*25:low+(high-low)*i/4,yy=y(v);svg.append(svgNode('line',{x1:L,x2:W-R,y1:yy,y2:yy,stroke:'#e2eaf0'}),svgNode('text',{x:L-10,y:yy+4,'text-anchor':'end',fill:'#647b8b','font-size':12},Number(v.toPrecision(4))+(normalized?'%':'')))}
-    const ticks=new Set();for(let i=0;i<(minT===maxT?1:6);i++){const rawT=minT+(maxT-minT)*i/5,t=Math.max(minT,Math.floor((rawT+8*3600000)/86400000)*86400000-8*3600000);if(ticks.has(t))continue;ticks.add(t);const d=new Date(t+8*3600000);svg.append(svgNode('text',{x:x(t),y:H-15,'text-anchor':'middle',fill:'#647b8b','font-size':12},d.toISOString().slice(0,10)))}
+    const ticks=new Set();for(let i=0;i<(minT===maxT?1:mobile?3:6);i++){const rawT=minT+(maxT-minT)*i/(mobile?2:5),t=Math.max(minT,Math.floor((rawT+8*3600000)/86400000)*86400000-8*3600000);if(ticks.has(t))continue;ticks.add(t);const d=new Date(t+8*3600000);svg.append(svgNode('text',{x:x(t),y:H-15,'text-anchor':'middle',fill:'#647b8b','font-size':12},d.toISOString().slice(mobile?5:0,10)))}
     const legend=document.createElement('div');legend.className='legend';
     for(const s of members){
       const colorKey=s.signature;if(!seriesColors.has(colorKey))seriesColors.set(colorKey,colors[seriesColors.size%colors.length]);const color=seriesColors.get(colorKey);
@@ -88,14 +89,15 @@ function renderCharts(data){
         const title=`${source} · ${s.label}\n${p.sampled_at}\n原值 ${Number(p.value.toPrecision(8))} ${p.unit}（${p.numeric_records}条数值）${normalized?'\n相对位置 '+value(p).toFixed(2)+'%':''}`;
         const c=svgNode('circle',{cx:x(time(p.sampled_at)),cy:y(value(p)),r:4,fill:s.id?'white':color,stroke:color,tabindex:0,'aria-label':title});c.append(svgNode('title',{},title));
         const show=e=>{const t=$('tip');t.textContent=title;t.style.display='block';const rect=c.getBoundingClientRect();t.style.left=Math.min((e.clientX??rect.x)+14,innerWidth-300)+'px';t.style.top=Math.max(8,Math.min((e.clientY??rect.y)+12,innerHeight-145))+'px'};
-        c.addEventListener('pointermove',show);c.addEventListener('focus',show);c.addEventListener('pointerleave',()=>$('tip').style.display='none');c.addEventListener('blur',()=>$('tip').style.display='none');svg.append(c);
-        if(finite.length<=40)svg.append(svgNode('text',{x:x(time(p.sampled_at)),y:y(value(p))-11,'text-anchor':'middle',fill:color,'font-size':12},Number(value(p).toPrecision(4))+(normalized?'%':'')));
+        c.addEventListener('click',()=>window.LimsDevice?.showPoint(title));c.addEventListener('pointermove',show);c.addEventListener('focus',show);c.addEventListener('pointerleave',()=>$('tip').style.display='none');c.addEventListener('blur',()=>$('tip').style.display='none');svg.append(c);
+        if(finite.length<=(mobile?1:40))svg.append(svgNode('text',{x:x(time(p.sampled_at)),y:y(value(p))-11,'text-anchor':'middle',fill:color,'font-size':12},Number(value(p).toPrecision(4))+(normalized?'%':'')));
       }
       const item=document.createElement('span'),dot=document.createElement('i');dot.className='dot';dot.style.background=color;item.append(dot,document.createTextNode(`${source} · ${s.label} · ${dateRange(s)}`));legend.append(item);
     }
-    root.append(svg,legend);
+    if(mobile)svg.querySelectorAll('text').forEach(t=>t.setAttribute('font-size','14'));root.append(svg,legend);
   }
 }
+window.addEventListener('lims-layout-change',()=>{if(currentData||pinned.length)renderCharts()});
 $('pinCurves').onclick=()=>{
   if(queryPending)return;
   const existing=new Set(pinned.map(s=>s.signature)),additions=currentSeries().filter(s=>s.points.some(p=>Number.isFinite(p.value))&&!existing.has(s.signature));

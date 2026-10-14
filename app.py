@@ -5,7 +5,7 @@ import io
 import os
 from contextlib import closing
 from urllib.parse import urlparse
-from flask import Flask, Response, jsonify, render_template, request, stream_with_context
+from flask import Flask, Response, jsonify, render_template, request, stream_with_context, send_from_directory
 from bootstrap import bootstrap
 from lims import core
 from lims import anomalies
@@ -49,6 +49,12 @@ def create_app():
     @app.get('/lims/anomalies')
     def anomaly_page():
         return render_template('anomalies.html')
+
+    @app.get('/lims-assets/<name>')
+    def device_asset(name):
+        if name not in ('device.js','mobile.css'):
+            return jsonify(error='资源不存在'),404
+        return send_from_directory(app.static_folder,name)
 
     @app.get('/api/lims/anomalies')
     def anomaly_report():

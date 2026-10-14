@@ -34,6 +34,17 @@ class WebTests(unittest.TestCase):
         self.assertEqual(len(self.client.get('/api/lims/anomaly-rules',headers=self.auth).json['rules']),91)
         self.assertEqual(self.client.get('/api/lims/anomaly-trend?start=bad',headers=self.auth).status_code,400)
 
+    def test_mobile_assets_and_shared_pages(self):
+        for path in ['/lims-assets/device.js','/lims-assets/mobile.css']:
+            self.assertEqual(self.client.get(path).status_code,401)
+            with self.client.get(path,headers=self.auth) as response:
+                self.assertEqual(response.status_code,200)
+        self.assertEqual(self.client.get('/lims-assets/unknown.js',headers=self.auth).status_code,404)
+        for path in ['/lims','/lims/anomalies']:
+            body=self.client.get(path,headers=self.auth).get_data(as_text=True)
+            self.assertIn('/lims-assets/device.js',body)
+            self.assertIn('/lims-assets/mobile.css',body)
+
     def test_real_example_and_stream_export(self):
         query={'plant':'三排送','sample':'3P-1402','analyte':'喹啉不溶物','start':'2026-09-01','end':'2026-09-11'}
         response=self.client.get('/api/lims/query',query_string=query,headers=self.auth)
