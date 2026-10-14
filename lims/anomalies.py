@@ -73,6 +73,8 @@ def check_spec(row, applicable):
     reasons, pending = [], []
     for rule in applicable:
         label = f"{rule['id']} 第{rule['page']}页 · {limits_text(rule)}"
+        if rule.get('override_source'):
+            label += ' · ' + rule['override_source']
         if row['sampled_at'][:10] < rule['effective']:
             pending.append(label + '：标准尚未生效')
             continue
